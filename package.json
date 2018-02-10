@@ -1,0 +1,19 @@
+{
+  "name": "icarus",
+  "author": "cabeza",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PorUnaCabeza/Icarus.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PorUnaCabeza/Icarus/issues"
+  },
+  "homepage": "https://github.com/PorUnaCabeza/Icarus#readme"
+}
