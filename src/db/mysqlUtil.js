@@ -3,8 +3,17 @@
  */
 const config = require("../../config/dbConfig");
 const mysql = require('mysql');
+
 const connection = mysql.createConnection(config);
-connection.connect();
+
+const init = function () {
+  connection.connect(err => {
+    if (err)
+      console.log(err);
+    else
+      console.log('connected as id ' + connection.threadId);
+  });
+};
 const test = function () {
   connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
     if (error) throw error;
@@ -13,10 +22,37 @@ const test = function () {
 };
 
 const close = function () {
-  connection.end();
-}
+  connection.end(err => {
+    if (err)
+      console.log(err);
+    else
+      console.log(' The connection is terminated now');
+  });
+};
+
+const query = function (sql) {
+  return new Promise((resolve, reject) => {
+    connection.query(sql, function (error, results) {
+      if (error) reject(error);
+      resolve(results);
+    });
+  });
+};
+
+const batchInsert  = function (sql, arrayParam) {
+  return new Promise((resolve, reject) => {
+    connection.query(sql, [arrayParam], function (error, results) {
+      if (error) reject(error);
+      resolve(results);
+    });
+  });
+};
 
 module.exports = {
+  init,
   close,
-  test
+  test,
+  query,
+  batchInsert,
+  insertKeyLineData
 };

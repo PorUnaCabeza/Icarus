@@ -1,6 +1,6 @@
 {
-  "host": "please input your host here",
+  "host": "",
   "user": "root",
-  "password": "please input your password here",
+  "password": "123456",
   "database": "icarus"
 }
