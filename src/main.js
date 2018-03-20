@@ -4,6 +4,17 @@
 const schedule = require('node-schedule');
 const mysqlUtil = require('./db/mysqlUtil');
 const seeker = require('./seeker/seeker.js');
+const sqls = require('./db/sql');
+const express = require('express');
+
+var expressApp = express();
+expressApp.get('/price/:symbol/:time', async function (req, res) {
+  let re = await mysqlUtil.query(sqls.queryPriceSql, [req.params.symbol, req.params.time]);
+  res.json(re[0]);
+});
+expressApp.listen(9065, () => {
+  console.log(`express listening at port 9065`);
+});
 
 schedule.scheduleJob('42 * * * *', () => getDataFromOkCoin());
 

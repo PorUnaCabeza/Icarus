@@ -24,16 +24,16 @@ const close = function () {
   });
 };
 
-const query = function (sql) {
+const query = function (sql, arrayParam) {
   return new Promise((resolve, reject) => {
-    connection.query(sql, function (error, results) {
+    connection.query(sql, arrayParam, function (error, results) {
       if (error) reject(error);
       resolve(results);
     });
   });
 };
 
-const batchInsert  = function (sql, arrayParam) {
+const batchInsert = function (sql, arrayParam) {
   return new Promise((resolve, reject) => {
     connection.query(sql, [arrayParam], function (error, results) {
       if (error) reject(error);
