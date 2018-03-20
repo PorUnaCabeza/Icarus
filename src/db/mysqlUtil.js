@@ -14,12 +14,6 @@ const init = function () {
       console.log('connected as id ' + connection.threadId);
   });
 };
-const test = function () {
-  connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
-    if (error) throw error;
-    console.log('The solution is: ', results[0].solution);
-  });
-};
 
 const close = function () {
   connection.end(err => {
@@ -51,8 +45,6 @@ const batchInsert  = function (sql, arrayParam) {
 module.exports = {
   init,
   close,
-  test,
   query,
-  batchInsert,
-  insertKeyLineData
+  batchInsert
 };
