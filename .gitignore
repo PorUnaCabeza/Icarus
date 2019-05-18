@@ -9,3 +9,5 @@ yarn-debug.log*
 yarn-error.log*
 *.iml
 *.json
+*.memory-card.json
+/config
