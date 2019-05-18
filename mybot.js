@@ -18,7 +18,7 @@ const dealMessage = function(message) {
   if (roomId != ROOM_ID) return
   let userName = (message.from().toString() || '').replace(/Contact<(.*)>/g, '$1')
   let userId = MEMBER[userName]
-  //console.log(`${userName}: ${text}, time= ${timestamp}, id = ${id}, userId = ${userId}`)
+  console.log(`${userName}: ${text}, time= ${timestamp}, id = ${id}, userId = ${userId}`)
   mysql.exec(sql.saveMessage, [id, userId, userName, text, new Date().toLocaleString()])
 }
 const login = function() {
@@ -34,6 +34,9 @@ bot.on('scan', (qrcode, status) =>
   console.log(`${status}: https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(qrcode)}`)
 )
 bot.on('message', dealMessage)
+bot.on('logout', user => {
+  console.log(`user ${user} logout,new Date().toLocaleString()`)
+})
 
 const updateMember = async function() {
   let roomList = await bot.Room.findAll()
