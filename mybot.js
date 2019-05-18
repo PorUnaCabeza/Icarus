@@ -1,3 +1,4 @@
+process.env.TZ = 'Asia/Shanghai'
 const { Wechaty } = require('wechaty') // import { Wechaty } from 'wechaty'
 const mysql = require('./src/db/mysqlUtil')
 const sql = require('./src/db/sql')
@@ -18,7 +19,7 @@ const dealMessage = function(message) {
   let userName = (message.from().toString() || '').replace(/Contact<(.*)>/g, '$1')
   let userId = MEMBER[userName]
   //console.log(`${userName}: ${text}, time= ${timestamp}, id = ${id}, userId = ${userId}`)
-  mysql.exec(sql.saveMessage, [id, userId, userName, text, date.formatDate(timestamp + '000', DATE_FORMATE)])
+  mysql.exec(sql.saveMessage, [id, userId, userName, text, new Date().toLocaleString()])
 }
 const login = function() {
   return new Promise(function(resolve) {
